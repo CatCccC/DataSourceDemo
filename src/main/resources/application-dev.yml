@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    druid:
+      db1:
+        name: db1
+        url: jdbc:mysql://192.168.50.100:3306/db1?allowMultiQueries=true&autoReconnect=true&useUnicode=true&characterEncoding=utf-8
+        username: db1
+        password: 123456
+      db2:
+        name: db2
+        url: jdbc:mysql://192.168.50.100:3306/db2?allowMultiQueries=true&autoReconnect=true&useUnicode=true&characterEncoding=utf-8
+        username: db2
+        password: 123456
+logging:
+  path: /home/logs/demo
+debug: true

@@ -1,0 +1,67 @@
+spring:
+  profiles:
+    active: @profileActive@
+  application:
+    name: demo
+  datasource:
+    druid:
+      filter:
+        stat:
+          enabled: true
+        wall:
+          config:
+            none-base-statement-allow: true  #是否允许执行非基本语句
+            multi-statement-allow: true      #是否允许执行多个语句
+          enabled: true
+        config:
+          enabled: true
+        log4j2:
+          enabled: true
+          statement-executable-sql-log-enable: true
+      db1:
+        db-type: mysql
+        driver-class-name: com.mysql.jdbc.Driver
+        max-active: 200 #连接池最大值
+        initial-size: 10 # 初始化大小
+        max-wait: 30000 #获取连接最大等待时间
+        min-idle: 10  #连接池最小空闲
+        time-between-eviction-runs-millis: 30000 #逐出连接的检测时间间隔
+        min-evictable-idle-time-millis: 30000 #最小逐出时间
+        validation-query: SELECT 1 #检测连接是否有效的SQL
+        testWhileIdle: true #申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+        testOnBorrow: false #借出连接时是否做测试
+        testOnReturn: true #归还连接时是否做测试
+        removeAbandoned: true #超过时间限制是否回收
+        removeAbandonedTimeout: 3600 # 超过时间限制多长
+        max-pool-prepared-statement-per-connection-size:  50 #启用PSCache
+      db2:
+        db-type: mysql
+        driver-class-name: com.mysql.jdbc.Driver
+        max-active: 200 #连接池最大值
+        initial-size: 10 # 初始化大小
+        max-wait: 30000 #获取连接最大等待时间
+        min-idle: 10  #连接池最小空闲
+        time-between-eviction-runs-millis: 30000 #逐出连接的检测时间间隔
+        min-evictable-idle-time-millis: 30000 #最小逐出时间
+        validation-query: SELECT 1 #检测连接是否有效的SQL
+        testWhileIdle: true #申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+        testOnBorrow: false #借出连接时是否做测试
+        testOnReturn: true #归还连接时是否做测试
+        removeAbandoned: true #超过时间限制是否回收
+        removeAbandonedTimeout: 3600 # 超过时间限制多长
+        max-pool-prepared-statement-per-connection-size:  50 #启用PSCache
+mybatis:
+  #  mybatis config 其他配置 需要到 SqlSessionFactoryBean 中 手动配置
+  configuration:
+    cache-enabled: true #全局映射器启用缓存
+    multiple-result-sets-enabled: true #对于未知的SQL查询，允许返回不同的结果集以达到通用的效果
+    use-column-label: true #允许使用列标签代替列名
+    use-generated-keys: false #不允许使用自定义的主键值(比如由程序生成的UUID 32位编码作为键值)，数据表的PK生成策略将被覆盖 -
+    auto-mapping-behavior: partial #给予被嵌套的resultMap以字段-属性的映射支持 FULL,PARTIAL
+    safe-row-bounds-enabled: false #允许在嵌套语句上使用RowBounds
+    mapUnderscoreToCamelCase: true #自动映射
+    localCacheScope: session #缓存会话范围
+    jdbcTypeForNull: other #当没有特定的JDBC类型时，指定空值的JDBC类型为参数提供了。 某些驱动程序需要指定列JDBC类型但其他类型使用泛型值，如NULL，VARCHAR或OTHER
+    lazyLoadTriggerMethods: equals,clone,hashCode,toString #指定哪个Object的方法触发延迟加载
+    aggressive-lazy-loading: false # 设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指 定)，不会加载关联表的所有字段，以提高性能
+debug: true
